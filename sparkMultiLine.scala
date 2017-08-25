@@ -5,7 +5,7 @@ import org.apache.spark.{SparkConf, SparkContext}
 import scala.collection.mutable.ArrayBuffer
 
 /**
-  * Created by HongYuChai on 2017/8/18.
+  * Created by Dank on 2017/8/25.
   */
 
 object logAnalysis_catalina {
