@@ -1,5 +1,3 @@
-package com.vitco
-
 import org.apache.log4j.{Level, Logger}
 import org.apache.spark.sql.SQLContext
 import org.apache.spark.{SparkConf, SparkContext}
@@ -20,12 +18,12 @@ object logAnalysis_catalina {
     val sc = new SparkContext(conf)
     val sqlContext = new SQLContext(sc)
     val sourceRdd = sc.textFile(root + "catalina/catalina*.log")
-    var log = new ArrayBuffer[String]()//ÓÃÓÚÁÙÊ±±£´æÒªºÏ²¢µÄÐÐ
+    var log = new ArrayBuffer[String]()//ç”¨äºŽä¸´æ—¶ä¿å­˜è¦åˆå¹¶çš„è¡Œ
 
     val preprocessRDD = sourceRdd
       .map(line => {
         var tlog = " "
-        if (log.length < 2) {//ºÏ²¢Á½ÐÐ
+        if (log.length < 2) {//åˆå¹¶ä¸¤è¡Œ
           log += line
           if (log.length == 2) {
             if (log(0).contains(": ")) tlog = log(1) + " " + log(0)
@@ -33,7 +31,7 @@ object logAnalysis_catalina {
             log = new ArrayBuffer[String]()
           }
         }
-        tlog//ºÏ²¢ºóµÄÐÐ
+        tlog//åˆå¹¶åŽçš„è¡Œ
       })
       .filter(!_.equals(" "))
     import sqlContext.implicits._
